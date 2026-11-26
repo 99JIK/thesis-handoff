@@ -1,0 +1,33 @@
+# 도로 유형별 실측 표준편차. 다양성 격자의 칸 폭(w = 1이면 칸 하나가 1 sd).
+#
+# 출처: C:\Github\sil-agent-repertoire  results/ladder/repertoire.txt  3~5행 (커밋 a604b91)
+# 실측 다섯 종(highD, inD, NGSIM, SinD, TGSIM)에서 층별 단위가 200개 넘을 때 낸 값.
+# 실측 원본은 재배포가 안 돼서 값을 여기 박고 채점은 이 파일만 읽음.
+# 단위: v_* m/s, a_* m/s^2, za 100 m당 부호 변화 횟수
+#
+# 이 값을 바꾸면 배수가 전부 바뀜. 바꿀 거면 docs/design.md 먼저 고칠 것
+
+source:
+  repo: sil-agent-repertoire
+  commit: a604b91
+  file: results/ladder/repertoire.txt
+
+scale:
+  junction:
+    v_mean: 4.221
+    v_sd: 0.991
+    a_mean: 0.798
+    a_sd: 0.514
+    za: 7.625
+  urb_block:
+    v_mean: 3.970
+    v_sd: 0.807
+    a_mean: 0.721
+    a_sd: 0.537
+    za: 18.202
+  hw_link:
+    v_mean: 10.698
+    v_sd: 0.485
+    a_mean: 0.432
+    a_sd: 0.597
+    za: 3.678

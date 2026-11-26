@@ -1,0 +1,107 @@
+<root BTCPP_format="4">
+  <Params>
+    <Param name="b04_amt" min="10" max="20" default="15" />
+    <Param name="b00_amt" min="10" max="20" default="15" />
+    <Param name="b01_c1" min="2" max="5" default="3.5" />
+    <Param name="b01_amt" min="10" max="20" default="15" />
+    <Param name="b02_c0" min="20" max="40" default="30" />
+    <Param name="b02_amt" min="10" max="20" default="15" />
+    <Param name="b03_amt" min="10" max="20" default="15" />
+    <Param name="b05_amt" min="-15" max="-5" default="-10" />
+    <Param name="b06_c0" min="0.1" max="0.2" default="0.15" />
+    <Param name="b06_amt" min="5" max="10" default="7.5" />
+    <Param name="b13_amt" min="5" max="10" default="7.5" />
+    <Param name="b14_c0" min="30" max="60" default="45" />
+    <Param name="b14_amt" min="-10" max="-5" default="-7.5" />
+    <Param name="b07_c1" min="10" max="20" default="15" />
+    <Param name="b08_c1" min="20" max="30" default="25" />
+    <Param name="b12_amt" min="2" max="5" default="3.5" />
+    <Param name="b15_c1" min="10" max="20" default="15" />
+    <Param name="b15_amt" min="2" max="5" default="3.5" />
+  </Params>
+  <BehaviorTree ID="background_vehicle">
+    <Parallel>
+      <Fallback>
+        <Sequence>
+          <Condition ID="SpeedLimitBelow" kmh="40" />
+          <Action ID="SetSpeedDiff" pct="{b04_amt}" name="adapt_to_road_type" />
+        </Sequence>
+        <Sequence>
+          <Condition ID="SpeedLimitBelow" kmh="60" />
+          <Action ID="SetSpeedDiff" pct="{b00_amt}" name="speed_adapt_to_limit" />
+        </Sequence>
+        <Sequence>
+          <Condition ID="LeaderPresent" />
+          <Condition ID="ClosingFaster" mps="{b01_c1}" />
+          <Action ID="SetSpeedDiff" pct="{b01_amt}" name="avoid_collisions" />
+        </Sequence>
+        <Sequence>
+          <Condition ID="JunctionAhead" meters="{b02_c0}" />
+          <Action ID="SetSpeedDiff" pct="{b02_amt}" name="navigate_junctions_cautiously" />
+        </Sequence>
+        <Sequence>
+          <Condition ID="LeaderPresent" />
+          <Condition ID="LeaderStopped" />
+          <Action ID="SetSpeedDiff" pct="{b03_amt}" name="react_to_leader" />
+        </Sequence>
+        <Sequence>
+          <Condition ID="SpeedLimitAbove" kmh="60" />
+          <Action ID="SetSpeedDiff" pct="{b05_amt}" name="speed_up_on_high_limit" />
+        </Sequence>
+        <Sequence>
+          <Condition ID="CurvatureAbove" invmeters="{b06_c0}" />
+          <Action ID="SetSpeedDiff" pct="{b06_amt}" name="slow_down_on_curves" />
+        </Sequence>
+        <Sequence>
+          <Condition ID="IsRightmostLane" />
+          <Condition ID="IsLeftmostLane" />
+          <Action ID="SetSpeedDiff" pct="{b13_amt}" name="position_in_lane_center" />
+        </Sequence>
+        <Sequence>
+          <Condition ID="TimeInLaneAbove" seconds="{b14_c0}" />
+          <Action ID="SetSpeedDiff" pct="{b14_amt}" name="exhibit_stress_behaviour" />
+        </Sequence>
+      </Fallback>
+      <Fallback>
+        <Sequence>
+          <Condition ID="LeaderPresent" />
+          <Condition ID="GapBelow" meters="{b07_c1}" />
+          <Action ID="SetGap" meters="3.5" name="maintain_distance" />
+        </Sequence>
+        <Sequence>
+          <Condition ID="LeaderPresent" />
+          <Condition ID="GapAbove" meters="{b08_c1}" />
+          <Action ID="SetGap" meters="2" name="close_gap" />
+        </Sequence>
+      </Fallback>
+      <Fallback>
+        <Sequence>
+          <Condition ID="IsRightmostLane" />
+          <Condition ID="IsLeftmostLane" />
+          <Action ID="EnableLaneChange" enabled="false" name="stay_in_lane" />
+        </Sequence>
+        <Sequence>
+          <Condition ID="LaneCountAbove" lanes="2" />
+          <Action ID="EnableLaneChange" enabled="true" name="change_lanes_on_multilane" />
+        </Sequence>
+      </Fallback>
+      <Fallback>
+        <Sequence>
+          <Condition ID="TrafficLightRed" />
+          <Action ID="SetIgnoreLights" pct="0" name="comply_with_traffic_lights" />
+        </Sequence>
+        <Sequence>
+          <Condition ID="TrafficLightGreen" />
+          <Action ID="SetIgnoreLights" pct="{b12_amt}" name="disregard_traffic_lights_sometimes" />
+        </Sequence>
+      </Fallback>
+      <Fallback>
+        <Sequence>
+          <Condition ID="LeaderPresent" />
+          <Condition ID="GapBelow" meters="{b15_c1}" />
+          <Action ID="SetIgnoreVehicles" pct="{b15_amt}" name="make_errors" />
+        </Sequence>
+      </Fallback>
+    </Parallel>
+  </BehaviorTree>
+</root>

@@ -1,0 +1,361 @@
+﻿tree,id,set,effect,intent,intent_dir,status,why
+exp4_angry/tree_00,slow_down_in_traffic,speed,slower,reduce speed when approaching a slower leader in traffic,down,일치,
+exp4_angry/tree_00,speed_up_on_free_road,speed,faster,increase speed when the road ahead is clear,up,일치,
+exp4_angry/tree_00,maintain_safe_distance,gap,wider,keep a safe distance from the vehicle ahead,none,판정 불가,의도 단어 없음
+exp4_angry/tree_00,close_gap_in_traffic,gap,narrower,close the gap to the vehicle ahead in heavy traffic,none,판정 불가,의도 단어 없음
+exp4_angry/tree_00,change_lanes_to_pass,lane_change,allow,change lanes to pass a stopped leader,none,판정 불가,의도 단어 없음
+exp4_angry/tree_00,avoid_lanes_with_stopped_vehicles,lane_change,forbid,avoid changing into a lane with a stopped vehicle,down,일치,
+exp4_angry/tree_00,comply_with_traffic_rules,ign_lights,more,always comply with traffic rules by default,zero,일치,
+exp4_angry/tree_00,disregard_traffic_lights_in_emergency,ign_lights,more,disregard traffic lights when stopped at a red light in an emergency,up,일치,
+exp4_angry/tree_00,slow_down_at_junctions,speed,slower,reduce speed when approaching a junction,down,일치,
+exp4_angry/tree_00,speed_up_after_junction,speed,faster,increase speed after passing a junction,up,일치,
+exp4_angry/tree_00,prefer_rightmost_lane,lane_change,allow,prefer the rightmost lane when possible,none,판정 불가,의도 단어 없음
+exp4_angry/tree_00,avoid_leftmost_lane,lane_change,forbid,avoid the leftmost lane when possible,down,일치,
+exp4_angry/tree_00,reduce_speed_in_congestion,speed,slower,reduce speed in congested traffic,down,일치,
+exp4_angry/tree_00,increase_following_distance_in_congestion,gap,wider,increase following distance in congested traffic,up,일치,
+exp4_angry/tree_00,adapt_to_road_conditions,speed,slower,reduce speed on sharp curves,down,일치,
+exp4_angry/tree_00,react_to_proximity,speed,slower,react to proximity of other vehicles by reducing speed,down,일치,
+exp4_angry/tree_00,increase_aggression_in_traffic,ign_vehicles,more,increase aggression in slow traffic by disregarding other vehicles,up,일치,
+exp4_angry/tree_00,disregard_traffic_rules_in_emergency,ign_lights,more,disregard traffic rules in emergency situations,up,일치,
+exp4_angry/tree_01,slow_for_traffic,speed,slower,reduce speed when approaching a slower leader in moderate to high speeds,down,일치,
+exp4_angry/tree_01,speed_up_free_road,speed,faster,increase speed on a free road when current speed is low to moderate,up,일치,
+exp4_angry/tree_01,slow_at_junctions,speed,slower,reduce speed when approaching a junction,down,일치,
+exp4_angry/tree_01,tailgate,gap,narrower,reduce the gap to the leader when it's too far away,down,일치,
+exp4_angry/tree_01,keep_safe_distance,gap,wider,increase the gap to the leader when it's too close,up,일치,
+exp4_angry/tree_01,change_lane_to_faster,lane_change,allow,change lane to a potentially faster one when possible and after some time in the current lane,none,판정 불가,의도 단어 없음
+exp4_angry/tree_01,avoid_lane_change_near_junction,lane_change,forbid,avoid changing lanes near a junction,down,일치,
+exp4_angry/tree_01,comply_with_traffic_rules,ign_lights,more,"by default, comply with traffic lights",zero,일치,
+exp4_angry/tree_01,disregard_traffic_lights_slightly,ign_lights,more,slightly disregard traffic lights when there's no leader and the light is red,up,일치,
+exp4_angry/tree_01,cooperate_with_others,gap,wider,cooperate with the leader by increasing the gap when closing in too fast,none,판정 불가,의도 단어 없음
+exp4_angry/tree_01,compete_with_others,gap,narrower,compete with the leader by reducing the gap when they are opening up,none,판정 불가,의도 단어 없음
+exp4_angry/tree_01,navigate_junctions_cautiously,speed,slower,reduce speed when navigating through a junction,down,일치,
+exp4_angry/tree_01,speed_up_on_straight_road,speed,faster,increase speed on straight roads,up,일치,
+exp4_angry/tree_01,aggressive_driving,speed,faster,drive more aggressively when behind a slow leader,down,불일치,
+exp4_angry/tree_01,defensive_driving,gap,wider,drive more defensively when the gap to the leader is too small,none,판정 불가,의도 단어 없음
+exp4_angry/tree_01,maintain_safe_distance,gap,wider,maintain a safe distance to the leader,none,판정 불가,의도 단어 없음
+exp4_angry/tree_01,adjust_lane_position,lane_change,allow,adjust lane position when not on the outer lanes,none,판정 불가,의도 단어 없음
+exp4_angry/tree_01,avoid_lane_changes_on_curvy_roads,lane_change,forbid,avoid changing lanes on curvy roads,down,일치,
+exp4_angry/tree_01,disregard_rules_slightly,ign_signs,more,slightly disregard traffic rules when the speed limit is low,up,일치,
+exp4_angry/tree_01,comply_with_rules_strictly,ign_signs,more,"by default, comply strictly with traffic rules",zero,일치,
+exp4_angry/tree_02,slow_down_at_junctions,speed,slower,reduce speed when approaching a junction,down,일치,
+exp4_angry/tree_02,speed_up_after_stopped_leader,speed,faster,accelerate when the leader starts moving again,up,일치,
+exp4_angry/tree_02,slow_down_in_curvy_roads,speed,slower,reduce speed in curvy roads,down,일치,
+exp4_angry/tree_02,keep_safe_distance,gap,wider,maintain a safe distance from the leader,none,판정 불가,의도 단어 없음
+exp4_angry/tree_02,close_gap_in_low_speed,gap,narrower,close the gap in low-speed situations,none,판정 불가,의도 단어 없음
+exp4_angry/tree_02,change_lane_to_faster_lane,lane_change,allow,change lane to a faster lane when possible,none,판정 불가,의도 단어 없음
+exp4_angry/tree_02,avoid_lane_change_in_junctions,lane_change,forbid,avoid lane changes when approaching a junction,down,일치,
+exp4_angry/tree_02,disregard_traffic_lights_when_hurried,ign_lights,more,disregard traffic lights when feeling hurried,up,일치,
+exp4_angry/tree_02,avoid_collisions,speed,slower,avoid collisions by slowing down,down,일치,
+exp4_angry/tree_02,navigate_junctions_cautiously,speed,slower,navigate junctions cautiously by reducing speed,down,일치,
+exp4_angry/tree_02,choose_faster_lane,lane_change,allow,choose a faster lane when possible,none,판정 불가,의도 단어 없음
+exp4_angry/tree_02,avoid_lane_changes_in_curvy_roads,lane_change,forbid,avoid lane changes in curvy roads,down,일치,
+exp4_angry/tree_02,slow_down_in_heavy_traffic,speed,slower,reduce speed in heavy traffic conditions,down,일치,
+exp4_angry/tree_02,react_to_leader_braking,speed,slower,react to the leader braking by slowing down,down,일치,
+exp4_angry/tree_02,increase_aggression_in_congestion,ign_vehicles,more,increase aggression level in congested situations,none,판정 불가,의도 단어 없음
+exp4_angry/tree_03,avoid_collision,speed,slower,avoid collision with leader,none,판정 불가,의도 단어 없음
+exp4_angry/tree_03,slow_down_at_junctions,speed,slower,slow down when approaching a junction,down,일치,
+exp4_angry/tree_03,brake_for_leader,speed,slower,brake when closing in on a leader,down,일치,
+exp4_angry/tree_03,cautious_intersection_handling,speed,slower,handle intersections cautiously,down,일치,
+exp4_angry/tree_03,react_to_cut_in,speed,slower,react to vehicles cutting in,none,판정 불가,의도 단어 없음
+exp4_angry/tree_03,slow_down_on_curves,speed,slower,slow down on curved roads,down,일치,
+exp4_angry/tree_03,aggressive_driving,speed,faster,drive aggressively when in a hurry,none,판정 불가,의도 단어 없음
+exp4_angry/tree_03,speed_up_on_straights,speed,faster,speed up on straight roads,up,일치,
+exp4_angry/tree_03,speed_limit_adherence,speed,slower,adhere to speed limits,none,판정 불가,의도 단어 없음
+exp4_angry/tree_03,speed_up_on_straight_road,speed,faster,speed up on straight roads,up,일치,
+exp4_angry/tree_03,aggressive_intersection_handling,speed,faster,handle intersections aggressively,none,판정 불가,의도 단어 없음
+exp4_angry/tree_03,react_to_tailgater,speed,faster,react to tailgaters,none,판정 불가,의도 단어 없음
+exp4_angry/tree_03,defensive_driving,speed,slower,drive defensively when being tailgated,none,판정 불가,의도 단어 없음
+exp4_angry/tree_03,tailgate,gap,narrower,tailgate when leader is far away,down,일치,
+exp4_angry/tree_03,keep_safe_distance,gap,wider,keep a safe distance from leader,none,판정 불가,의도 단어 없음
+exp4_angry/tree_03,lane_change_to_faster_lane,lane_change,allow,change lanes to a faster lane,none,판정 불가,의도 단어 없음
+exp4_angry/tree_03,stay_in_current_lane,lane_change,forbid,stay in current lane for a while,none,판정 불가,의도 단어 없음
+exp4_angry/tree_03,disregard_traffic_lights,ign_lights,more,disregard traffic lights when in a hurry,up,일치,
+exp4_angry/tree_03,obey_traffic_lights,ign_lights,more,obey traffic lights when they are green,zero,일치,
+exp4_angry/tree_03,lane_positioning_to_left,lane_change,allow,position to the left lane,none,판정 불가,의도 단어 없음
+exp4_angry/tree_03,lane_positioning_to_right,lane_change,allow,position to the right lane,none,판정 불가,의도 단어 없음
+exp4_angry/tree_04,speed_up_on_straight_roads,speed,faster,increase speed on straight roads,up,일치,
+exp4_angry/tree_04,slow_down_on_curvy_roads,speed,slower,decrease speed on curvy roads,down,일치,
+exp4_angry/tree_04,speed_up_when_leader_is_far,speed,faster,increase speed when the leader is far away,up,일치,
+exp4_angry/tree_04,slow_down_when_leader_is_close,speed,slower,decrease speed when the leader is close,down,일치,
+exp4_angry/tree_04,change_lane_to_faster_lane,lane_change,allow,change lane to a faster lane when possible,none,판정 불가,의도 단어 없음
+exp4_angry/tree_04,avoid_leftmost_lane_in_junctions,lane_change,forbid,avoid the leftmost lane in junctions,down,일치,
+exp4_angry/tree_04,avoid_lane_change_in_junctions,lane_change,forbid,avoid lane changes in junctions,down,일치,
+exp4_angry/tree_04,comply_with_traffic_rules,ign_lights,more,always comply with traffic rules by default,zero,일치,
+exp4_angry/tree_04,disregard_traffic_lights_slightly,ign_lights,more,slightly disregard traffic lights when waiting for a long time,up,일치,
+exp4_angry/tree_04,maintain_safe_distance,gap,wider,maintain a safe distance from the leader,none,판정 불가,의도 단어 없음
+exp4_angry/tree_04,reduce_distance_when_closing_in,gap,narrower,reduce distance when closing in on the leader,none,판정 불가,의도 단어 없음
+exp4_angry/tree_04,slow_down_at_junctions,speed,slower,slow down when approaching a junction,down,일치,
+exp4_angry/tree_04,choose_leftmost_lane_on_straight_roads,lane_change,allow,choose the leftmost lane on straight roads,none,판정 불가,의도 단어 없음
+exp4_angry/tree_04,slow_down_on_bumpy_roads,speed,slower,slow down on bumpy roads,down,일치,
+exp4_angry/tree_04,increase_distance_when_overtaking,gap,wider,increase distance when overtaking,none,판정 불가,의도 단어 없음
+exp4_angry/tree_04,decrease_distance_when_being_overtaken,gap,narrower,decrease distance when being overtaken,none,판정 불가,의도 단어 없음
+exp4_angry/tree_04,disregard_vehicles_slightly,ign_vehicles,more,slightly disregard vehicles when waiting for a long time,up,일치,
+exp4_angry/tree_04,disregard_walkers_slightly,ign_walkers,more,slightly disregard walkers when waiting for a long time,up,일치,
+exp4_anxious/tree_00,slow_at_junctions,speed,slower,reduce speed when approaching an intersection,down,일치,
+exp4_anxious/tree_00,navigate_junctions_cautiously,speed,slower,reduce speed when approaching an intersection,down,일치,
+exp4_anxious/tree_00,slow_on_curves,speed,slower,reduce speed on sharp curves,down,일치,
+exp4_anxious/tree_00,speed_up_on_straights,speed,faster,increase speed on straight roads with high speed limits,up,일치,
+exp4_anxious/tree_00,follow_closely,gap,narrower,follow closely when there is a leader and the gap is large,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_00,keep_distance,gap,wider,keep a safe distance when there is a leader and the gap is small,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_00,change_lanes_frequently,lane_change,allow,change lanes frequently when in a lane for a long time and there are multiple lanes,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_00,avoid_lane_changes,lane_change,forbid,avoid lane changes when in an intersection,down,일치,
+exp4_anxious/tree_00,comply_with_traffic_lights,ign_lights,more,always comply with red traffic lights,zero,일치,
+exp4_anxious/tree_00,disregard_traffic_lights_slightly,ign_lights,more,slightly disregard traffic lights when the speed is low and the light is green,up,일치,
+exp4_anxious/tree_00,avoid_collisions,gap,wider,avoid collisions by increasing the gap when the leader is close,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_00,drive_aggressively,speed,faster,drive more aggressively when the speed is low and there is a leader,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_00,adapt_to_road_conditions,speed,slower,reduce speed on curved roads,down,일치,
+exp4_anxious/tree_00,be_aware_of_surroundings,gap,wider,keep a safe distance when there is a leader and the gap is small,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_00,choose_optimal_lane,lane_change,allow,choose the optimal lane when there are multiple lanes and the speed is high,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_01,slow_down_in_traffic,speed,slower,reduce speed when approaching a leader at higher speeds,both,판정 불가,의도 단어 양쪽
+exp4_anxious/tree_01,avoid_collision,speed,slower,slow down to avoid collision with the leader,down,일치,
+exp4_anxious/tree_01,react_to_surroundings,speed,slower,slow down in response to a leader that is closing in quickly,down,일치,
+exp4_anxious/tree_01,prepare_for_junction,speed,slower,reduce speed when approaching an intersection,down,일치,
+exp4_anxious/tree_01,slow_on_curves,speed,slower,reduce speed on sharp curves,down,일치,
+exp4_anxious/tree_01,speed_up_when_clear,speed,faster,increase speed when there is no leader and current speed is low,up,일치,
+exp4_anxious/tree_01,slow_for_red_light,speed,slower,slow down when approaching an intersection with a potential red light,down,일치,
+exp4_anxious/tree_01,adjust_for_uneven_road,speed,slower,"slow down on roads with lower speed limits, potentially due to uneven road conditions",down,일치,
+exp4_anxious/tree_01,anticipate_traffic_signal,speed,slower,slow down when approaching an intersection where the traffic light might turn red,down,일치,
+exp4_anxious/tree_01,maintain_safe_gap,gap,wider,increase the gap to the leader when it's too small,up,일치,
+exp4_anxious/tree_01,close_gap_slightly,gap,narrower,slightly decrease the gap to the leader when it's too large,down,일치,
+exp4_anxious/tree_01,change_lane_to_pass,lane_change,allow,change lanes to pass the leader when possible and safe,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_01,avoid_lane_changes,lane_change,forbid,avoid lane changes while in an intersection,down,일치,
+exp4_anxious/tree_01,stop_at_red_light,ign_lights,more,always stop at a red traffic light,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_01,choose_left_lane,lane_change,allow,consider changing to the left lane after some time in the current lane,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_02,speed_adaptation_low_speed,speed,slower,reduce speed in low speed limit areas,down,일치,
+exp4_anxious/tree_02,speed_adaptation_high_speed,speed,faster,increase speed in high speed limit areas,up,일치,
+exp4_anxious/tree_02,slow_down_for_junction,speed,slower,slow down when approaching a junction,down,일치,
+exp4_anxious/tree_02,follow_at_safe_distance,gap,wider,maintain a safe following distance,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_02,close_gap_in_low_speed,gap,narrower,close the gap in low speed situations,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_02,change_lane_to_faster,lane_change,allow,change lane to a faster one when possible,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_02,avoid_lane_change_in_junction,lane_change,forbid,avoid lane changes near junctions,down,일치,
+exp4_anxious/tree_02,comply_with_traffic_rules,ign_lights,more,always comply with traffic rules by default,zero,일치,
+exp4_anxious/tree_02,disregard_traffic_lights_in_emergency,ign_lights,more,disregard traffic lights in emergency situations,up,일치,
+exp4_anxious/tree_02,avoid_collision,speed,slower,avoid collision by slowing down,down,일치,
+exp4_anxious/tree_02,navigate_junction_cautiously,speed,slower,navigate junctions cautiously,down,일치,
+exp4_anxious/tree_02,choose_lane_by_speed,lane_change,allow,choose lane based on speed,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_02,avoid_aggressive_driving,ign_vehicles,more,avoid aggressive driving by default,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_02,increase_aggression_in_low_speed,ign_vehicles,more,increase aggression in low speed situations,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_02,show_cautious_behavior,speed,slower,show cautious behavior when following a leader,down,일치,
+exp4_anxious/tree_02,make_progress_on_road,speed,faster,make progress on the road when possible,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_03,speed_adjust_to_leader,speed,slower,slow down when following a leader at high speeds,down,일치,
+exp4_anxious/tree_03,speed_up_on_clear_road,speed,faster,speed up when there is no leader and current speed is low,up,일치,
+exp4_anxious/tree_03,junction_approach_slow_down,speed,slower,slow down when approaching a junction,down,일치,
+exp4_anxious/tree_03,speed_limit_adjustment,speed,slower,adjust speed according to speed limit,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_03,maintain_safe_distance,gap,wider,increase following distance when it's too small,up,일치,
+exp4_anxious/tree_03,reduce_distance_on_clear_road,gap,narrower,decrease following distance when there is no leader and distance is large,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_03,lane_change_to_faster_lane,lane_change,allow,change lane to a faster one when possible and necessary,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_03,lane_change_to_slower_lane,lane_change,allow,change lane to a slower one when necessary,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_03,disregard_traffic_lights_slightly,ign_lights,more,slightly disregard traffic lights after waiting for a while,up,일치,
+exp4_anxious/tree_03,disregard_stop_signs_rarely,ign_signs,more,rarely disregard stop signs at low speeds,up,일치,
+exp4_anxious/tree_03,junction_navigation_speed_up,speed,faster,speed up inside a junction when current speed is low,up,일치,
+exp4_anxious/tree_03,reaction_to_leader_slowing,speed,slower,slow down when the leader is stopping,down,일치,
+exp4_anxious/tree_03,lane_positioning_to_right,lane_change,allow,position to the right when speed is low and possible,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_03,lane_positioning_to_left,lane_change,allow,position to the left when speed is high and possible,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_03,reaction_to_leader_speeding,speed,slower,slow down when closing in on the leader too fast,down,일치,
+exp4_anxious/tree_03,road_type_adaptation_to_highway,speed,faster,adapt to highway speeds when on a highway,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_03,road_type_adaptation_to_urban,speed,slower,adapt to urban speeds when in an urban area,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_03,intersection_approach_cautious,speed,slower,approach intersections cautiously,down,일치,
+exp4_anxious/tree_03,aggression_level_low,ign_vehicles,more,be less aggressive at low speeds,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_03,aggression_level_high,ign_vehicles,more,be more aggressive at high speeds,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_04,speed_adapt_to_limit,speed,slower,reduce speed when the limit is low,down,일치,
+exp4_anxious/tree_04,avoid_collisions,speed,slower,reduce speed to avoid collisions,down,일치,
+exp4_anxious/tree_04,navigate_junctions_cautiously,speed,slower,reduce speed when approaching junctions,down,일치,
+exp4_anxious/tree_04,react_to_leader,speed,slower,reduce speed when the leader stops,down,일치,
+exp4_anxious/tree_04,adapt_to_road_type,speed,slower,reduce speed on urban roads,down,일치,
+exp4_anxious/tree_04,speed_up_on_high_limit,speed,faster,increase speed when the limit is high,up,일치,
+exp4_anxious/tree_04,slow_down_on_curves,speed,slower,reduce speed on sharp curves,down,일치,
+exp4_anxious/tree_04,maintain_distance,gap,wider,increase following distance when too close,up,일치,
+exp4_anxious/tree_04,close_gap,gap,narrower,decrease following distance when too far,none,판정 불가,의도 단어 없음
+exp4_anxious/tree_04,stay_in_lane,lane_change,forbid,avoid lane changes on the sides,down,일치,
+exp4_anxious/tree_04,change_lanes_on_multilane,lane_change,allow,allow lane changes on multilane roads,up,일치,
+exp4_anxious/tree_04,comply_with_traffic_lights,ign_lights,more,always comply with red traffic lights,zero,일치,
+exp4_anxious/tree_04,disregard_traffic_lights_sometimes,ign_lights,more,occasionally disregard traffic lights,up,일치,
+exp4_anxious/tree_04,position_in_lane_center,speed,slower,reduce speed when on the sides,down,일치,
+exp4_anxious/tree_04,exhibit_stress_behaviour,speed,faster,increase speed when feeling stressed,up,일치,
+exp4_anxious/tree_04,make_errors,ign_vehicles,more,occasionally make errors when following,none,판정 불가,의도 단어 없음
+exp4_careful/tree_00,speed_limit_compliance,speed,slower,do not exceed the speed limit,up,판정 불가,값 무변화
+exp4_careful/tree_00,traffic_light_slowdown,speed,slower,slow down when approaching a red traffic light,down,일치,
+exp4_careful/tree_00,junction_approach_slow,speed,slower,slow down when approaching a junction,down,일치,
+exp4_careful/tree_00,leader_following,gap,wider,keep a safe distance to the leader,none,판정 불가,의도 단어 없음
+exp4_careful/tree_00,closing_in_fast,gap,wider,increase the gap when closing in fast on the leader,up,일치,
+exp4_careful/tree_00,lane_change_allow,lane_change,allow,allow lane changes on multi-lane roads,up,일치,
+exp4_careful/tree_00,lane_change_forbid,lane_change,forbid,forbid lane changes when on the outer lanes,down,일치,
+exp4_careful/tree_00,traffic_light_compliance,ign_lights,more,always comply with traffic lights,zero,일치,
+exp4_careful/tree_00,stop_sign_compliance,ign_signs,more,always comply with stop signs,zero,일치,
+exp4_careful/tree_00,collision_avoidance,ign_vehicles,more,always avoid collisions with stopped leaders,none,판정 불가,의도 단어 없음
+exp4_careful/tree_00,junction_navigation,speed,slower,slow down while navigating a junction,down,일치,
+exp4_careful/tree_00,lane_positioning,lane_change,allow,change lanes to the left when on the rightmost lane of a multi-lane road,none,판정 불가,의도 단어 없음
+exp4_careful/tree_00,following_behavior,gap,wider,adjust the gap to the leader based on the leader's speed,none,판정 불가,의도 단어 없음
+exp4_careful/tree_00,road_adaptation,speed,slower,slow down on sharp curves,down,일치,
+exp4_careful/tree_00,speed_limit_adaptation,speed,slower,slow down on roads with lower speed limits,down,일치,
+exp4_careful/tree_01,slow_at_junctions,speed,slower,reduce speed when approaching a junction,down,일치,
+exp4_careful/tree_01,yield_at_junctions,speed,slower,yield to other traffic at junctions,down,일치,
+exp4_careful/tree_01,comply_with_speed_limits,speed,slower,always comply with speed limits,none,판정 불가,의도 단어 없음
+exp4_careful/tree_01,slow_on_curves,speed,slower,reduce speed on sharp curves,down,일치,
+exp4_careful/tree_01,exceed_speed_limits_at_low_traffic,speed,faster,exceed speed limits in low-traffic conditions,up,일치,
+exp4_careful/tree_01,speed_up_on_straights,speed,faster,increase speed on straight roads with high speed limits,up,일치,
+exp4_careful/tree_01,maintain_distance,gap,wider,keep a safe distance from the leading vehicle,none,판정 불가,의도 단어 없음
+exp4_careful/tree_01,maintain_safety_margin,gap,wider,keep a safe distance from the leading vehicle,none,판정 불가,의도 단어 없음
+exp4_careful/tree_01,narrow_gap_in_traffic,gap,narrower,reduce the gap in slow traffic,down,일치,
+exp4_careful/tree_01,increase_safety_margin_at_high_speeds,gap,wider,increase the safety margin at high speeds,none,판정 불가,의도 단어 없음
+exp4_careful/tree_01,widen_gap_at_high_speeds,gap,wider,increase the gap at high speeds,up,일치,
+exp4_careful/tree_01,change_lanes_to_pass,lane_change,allow,change lanes to pass a slower vehicle,none,판정 불가,의도 단어 없음
+exp4_careful/tree_01,avoid_lane_changes_in_traffic,lane_change,forbid,avoid lane changes in slow traffic,down,일치,
+exp4_careful/tree_01,comply_with_traffic_lights,ign_lights,more,always comply with red traffic lights,zero,일치,
+exp4_careful/tree_01,disregard_traffic_lights_at_low_speeds,ign_lights,more,disregard traffic lights at very low speeds,up,일치,
+exp4_careful/tree_01,comply_with_stop_signs,ign_signs,more,always comply with stop signs,zero,일치,
+exp4_careful/tree_01,disregard_stop_signs_at_low_speeds,ign_signs,more,disregard stop signs at very low speeds,up,일치,
+exp4_careful/tree_01,avoid_collisions,ign_vehicles,more,avoid collisions with leading vehicles,none,판정 불가,의도 단어 없음
+exp4_careful/tree_01,disregard_vehicles_at_low_speeds,ign_vehicles,more,disregard vehicles at very low speeds,up,일치,
+exp4_careful/tree_01,prioritize_rightmost_lane,lane_change,allow,prefer the rightmost lane,none,판정 불가,의도 단어 없음
+exp4_careful/tree_01,avoid_lane_changes_on_curves,lane_change,forbid,avoid lane changes on sharp curves,down,일치,
+exp4_careful/tree_02,speed_limit_compliance,speed,slower,do not exceed the speed limit,up,판정 불가,값 무변화
+exp4_careful/tree_02,speed_limit_compliance_high,speed,faster,drive faster on high speed limit roads,up,일치,
+exp4_careful/tree_02,junction_navigation_slow,speed,slower,slow down when approaching a junction,down,일치,
+exp4_careful/tree_02,road_adaptation_curvy,speed,slower,slow down on curvy roads,down,일치,
+exp4_careful/tree_02,approach_junction_slow,speed,slower,slow down when approaching a junction,down,일치,
+exp4_careful/tree_02,leader_present_slow,speed,slower,slow down when there is a leader present,down,일치,
+exp4_careful/tree_02,leader_stopped_slow,speed,slower,slow down when the leader is stopped,down,일치,
+exp4_careful/tree_02,closing_faster_slow,speed,slower,slow down when closing in on the leader too fast,down,일치,
+exp4_careful/tree_02,road_adaptation_straight,speed,faster,speed up on straight roads,up,일치,
+exp4_careful/tree_02,gap_maintenance,gap,wider,maintain a safe following distance,none,판정 불가,의도 단어 없음
+exp4_careful/tree_02,gap_narrowing,gap,narrower,narrow the gap when it is too large,none,판정 불가,의도 단어 없음
+exp4_careful/tree_02,lane_change_allow,lane_change,allow,allow lane changes when not on the edge lanes,up,일치,
+exp4_careful/tree_02,lane_change_forbid,lane_change,forbid,forbid lane changes in junctions,down,일치,
+exp4_careful/tree_02,traffic_light_compliance,ign_lights,more,comply with red traffic lights,zero,일치,
+exp4_careful/tree_02,traffic_light_noncompliance,ign_lights,more,possibly disregard traffic lights when speeding up from a stop,up,일치,
+exp4_careful/tree_02,sign_compliance,ign_signs,more,comply with stop and yield signs by default,zero,일치,
+exp4_careful/tree_02,sign_noncompliance,ign_signs,more,possibly disregard stop and yield signs when speeding up from a stop,up,일치,
+exp4_careful/tree_02,collision_avoidance,ign_vehicles,more,avoid collisions with leaders by default,none,판정 불가,의도 단어 없음
+exp4_careful/tree_02,collision_avoidance_relax,ign_vehicles,more,relax collision avoidance when speeding up from a stop,none,판정 불가,의도 단어 없음
+exp4_careful/tree_02,lane_positioning_center,lane_change,allow,prefer the center lane when possible,none,판정 불가,의도 단어 없음
+exp4_careful/tree_02,lane_positioning_right,lane_change,allow,prefer the right lane when not on the rightmost lane,none,판정 불가,의도 단어 없음
+exp4_careful/tree_02,safety_margin_maintenance,gap,wider,maintain a safe following distance at high speeds,none,판정 불가,의도 단어 없음
+exp4_careful/tree_02,safety_margin_relax,gap,narrower,relax safety margin when speeding up from a stop,none,판정 불가,의도 단어 없음
+exp4_careful/tree_03,speed_up_on_straight_road,speed,faster,increase speed on straight roads,up,일치,
+exp4_careful/tree_03,slow_down_on_curvy_road,speed,slower,decrease speed on curvy roads,down,일치,
+exp4_careful/tree_03,slow_down_before_junction,speed,slower,slow down before approaching a junction,down,일치,
+exp4_careful/tree_03,maintain_safe_gap,gap,wider,maintain a safe distance from the leader vehicle,none,판정 불가,의도 단어 없음
+exp4_careful/tree_03,reduce_gap_in_traffic,gap,narrower,reduce the gap in slow-moving traffic,down,일치,
+exp4_careful/tree_03,change_lane_on_multi_lane_road,lane_change,allow,change lanes on multi-lane roads to maintain speed,none,판정 불가,의도 단어 없음
+exp4_careful/tree_03,avoid_lane_change_near_junction,lane_change,forbid,avoid changing lanes near junctions,down,일치,
+exp4_careful/tree_03,comply_with_traffic_rules,ign_lights,more,comply with traffic rules by default,zero,일치,
+exp4_careful/tree_03,disregard_traffic_lights_in_emergency,ign_lights,more,disregard traffic lights in emergency situations,up,일치,
+exp4_careful/tree_03,avoid_collision,speed,slower,avoid collisions by slowing down,down,일치,
+exp4_careful/tree_03,navigate_junction_cautiously,speed,slower,navigate junctions cautiously,down,일치,
+exp4_careful/tree_03,choose_optimal_lane,lane_change,allow,choose the optimal lane based on traffic conditions,none,판정 불가,의도 단어 없음
+exp4_careful/tree_03,maintain_safe_margin,gap,wider,maintain a safe margin at high speeds,none,판정 불가,의도 단어 없음
+exp4_careful/tree_03,respond_to_traffic_lights,speed,slower,respond to traffic lights by slowing down,down,일치,
+exp4_careful/tree_03,adapt_to_road_conditions,speed,slower,adapt to road conditions by adjusting speed,none,판정 불가,의도 단어 없음
+exp4_careful/tree_04,speed_limit_compliance,speed,slower,default to posted speed limit,none,판정 불가,의도 단어 없음
+exp4_careful/tree_04,navigate_junctions_cautiously,speed,slower,reduce speed when navigating intersections,down,일치,
+exp4_careful/tree_04,slow_for_junction,speed,slower,reduce speed when approaching a junction,down,일치,
+exp4_careful/tree_04,slow_for_traffic,speed,slower,reduce speed when following another vehicle,down,일치,
+exp4_careful/tree_04,speed_up_on_clear_road,speed,faster,slightly increase speed when road is clear,up,일치,
+exp4_careful/tree_04,maintain_safe_distance,gap,wider,keep a safe distance from the leading vehicle,none,판정 불가,의도 단어 없음
+exp4_careful/tree_04,narrow_gap_in_traffic,gap,narrower,slightly reduce distance in heavy traffic,none,판정 불가,의도 단어 없음
+exp4_careful/tree_04,widen_gap_for_stopped_leader,gap,wider,increase distance when the leader is stopped,none,판정 불가,의도 단어 없음
+exp4_careful/tree_04,maintain_safe_margin,gap,wider,keep a safe margin from other vehicles,none,판정 불가,의도 단어 없음
+exp4_careful/tree_04,lane_change_allowed_on_multi_lanes,lane_change,allow,allow lane changes on roads with multiple lanes,up,일치,
+exp4_careful/tree_04,forbid_lane_change_in_junction,lane_change,forbid,forbid lane changes while in an intersection,down,일치,
+exp4_careful/tree_04,prefer_rightmost_lane,lane_change,allow,prefer the rightmost lane when possible,none,판정 불가,의도 단어 없음
+exp4_careful/tree_04,prefer_lane_with_least_traffic,lane_change,allow,prefer the lane with the least traffic,none,판정 불가,의도 단어 없음
+exp4_careful/tree_04,comply_with_traffic_lights,ign_lights,more,default to complying with traffic lights,zero,일치,
+exp4_careful/tree_04,disregard_traffic_lights_with_low_priority,ign_lights,more,slightly increase chance of disregarding red lights,up,일치,
+exp4_careful/tree_04,comply_with_stop_signs,ign_signs,more,default to complying with stop signs,zero,일치,
+exp4_careful/tree_04,disregard_stop_signs_with_low_priority,ign_signs,more,slightly increase chance of disregarding stop signs,up,일치,
+exp4_careful/tree_04,avoid_collisions,ign_vehicles,more,default to avoiding collisions with other vehicles,none,판정 불가,의도 단어 없음
+exp4_careful/tree_04,disregard_vehicles_with_low_priority,ign_vehicles,more,slightly increase chance of disregarding other vehicles in certain situations,up,일치,
+exp4_careful/tree_04,comply_with_traffic_rules,ign_lights,more,default to complying with traffic rules,zero,일치,
+exp4_careful/tree_04,disregard_traffic_rules_with_low_priority,ign_lights,more,slightly increase chance of disregarding traffic rules,up,일치,
+exp4_reckless/tree_00,speed_up_on_straight_road,speed,faster,increase speed on straight roads,up,일치,
+exp4_reckless/tree_00,slow_down_on_curvy_road,speed,slower,decrease speed on curvy roads,down,일치,
+exp4_reckless/tree_00,adapt_speed_to_leader,speed,slower,adjust speed based on the leader's speed,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_00,maintain_safe_distance,gap,wider,maintain a safe distance from the leader,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_00,close_gap_on_straight_road,gap,narrower,close the gap on straight roads,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_00,change_lane_on_multi_lane_road,lane_change,allow,change lanes on multi-lane roads,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_00,stay_in_current_lane,lane_change,forbid,stay in the current lane for a while,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_00,disregard_traffic_rules,ign_lights,more,disregard traffic rules occasionally,up,일치,
+exp4_reckless/tree_00,slow_down_at_intersection,speed,slower,slow down when approaching an intersection,down,일치,
+exp4_reckless/tree_00,speed_up_after_intersection,speed,faster,speed up after passing an intersection,up,일치,
+exp4_reckless/tree_00,choose_leftmost_lane,lane_change,allow,choose the leftmost lane when possible,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_00,avoid_sharp_turns,speed,slower,slow down on sharp turns,down,일치,
+exp4_reckless/tree_00,react_to_leader,speed,slower,react to the leader's speed,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_00,disregard_red_light,ign_lights,more,disregard red lights occasionally,up,일치,
+exp4_reckless/tree_00,adapt_to_road_type,speed,slower,adapt speed to road type,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_01,speed_up_on_straight_roads,speed,faster,increase speed on straight roads,up,일치,
+exp4_reckless/tree_01,slow_down_on_curvy_roads,speed,slower,decrease speed on curvy roads,down,일치,
+exp4_reckless/tree_01,speed_up_on_high_speed_limits,speed,faster,increase speed on high speed limit roads,up,일치,
+exp4_reckless/tree_01,slow_down_on_low_speed_limits,speed,slower,decrease speed on low speed limit roads,down,일치,
+exp4_reckless/tree_01,maintain_safe_distance,gap,wider,keep a safe distance from the leader vehicle,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_01,decrease_distance_on_high_speed,gap,narrower,decrease distance on high speed roads,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_01,increase_distance_on_low_speed,gap,wider,increase distance on low speed roads,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_01,allow_lane_change_on_high_speed,lane_change,allow,allow lane change on high speed roads,up,일치,
+exp4_reckless/tree_01,forbid_lane_change_on_low_speed,lane_change,forbid,forbid lane change on low speed roads,down,일치,
+exp4_reckless/tree_01,disregard_traffic_lights_on_high_speed,ign_lights,more,disregard traffic lights on high speed roads,up,일치,
+exp4_reckless/tree_01,comply_with_traffic_lights_on_low_speed,ign_lights,more,comply with traffic lights on low speed roads,zero,일치,
+exp4_reckless/tree_01,disregard_stop_signs_on_low_traffic,ign_signs,more,disregard stop signs on low traffic roads,up,일치,
+exp4_reckless/tree_01,comply_with_stop_signs_on_high_traffic,ign_signs,more,comply with stop signs on high traffic roads,zero,일치,
+exp4_reckless/tree_01,ignore_vehicles_on_high_speed,ign_vehicles,more,ignore vehicles on high speed roads,up,일치,
+exp4_reckless/tree_01,avoid_vehicles_on_low_speed,ign_vehicles,more,avoid vehicles on low speed roads,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_01,speed_up_on_junctions,speed,faster,increase speed when approaching junctions,up,일치,
+exp4_reckless/tree_01,slow_down_on_junctions,speed,slower,decrease speed when approaching junctions,down,일치,
+exp4_reckless/tree_01,change_lane_on_junctions,lane_change,allow,change lane when approaching junctions,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_01,stay_in_lane_on_junctions,lane_change,forbid,stay in lane when approaching junctions,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_01,take_risks_on_high_speed,ign_vehicles,more,take risks on high speed roads,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_01,avoid_risks_on_low_speed,ign_vehicles,more,avoid risks on low speed roads,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_01,be_less_vigilant_on_low_speed,ign_vehicles,more,be less vigilant on low speed roads,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_02,speed_up_on_straight_road,speed,faster,increase speed on straight roads,up,일치,
+exp4_reckless/tree_02,slow_down_on_curvy_road,speed,slower,decrease speed on curvy roads,down,일치,
+exp4_reckless/tree_02,speed_up_when_leader_stopped,speed,faster,try to overtake when leader is stopped,down,불일치,
+exp4_reckless/tree_02,maintain_safe_gap,gap,wider,increase gap when too close to leader,up,일치,
+exp4_reckless/tree_02,tailgate,gap,narrower,decrease gap when leader is far away,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_02,lane_change_to_faster_lane,lane_change,allow,change lane to a potentially faster one,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_02,lane_change_to_rightmost_lane,lane_change,allow,change lane to the rightmost lane,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_02,disregard_traffic_lights,ign_lights,more,disregard traffic lights when red,up,일치,
+exp4_reckless/tree_02,disregard_stop_signs,ign_signs,more,disregard stop signs,up,일치,
+exp4_reckless/tree_02,avoid_collision,speed,slower,decrease speed to avoid collision,down,일치,
+exp4_reckless/tree_02,avoid_collision_with_pedestrians,ign_walkers,more,avoid collision with pedestrians,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_02,stay_in_lane,lane_change,forbid,stay in the rightmost lane,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_02,change_lane_on_curvy_road,lane_change,allow,change lane on curvy roads,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_02,slow_down_at_junction,speed,slower,decrease speed when approaching a junction,down,일치,
+exp4_reckless/tree_02,speed_up_after_junction,speed,faster,increase speed after passing a junction,up,일치,
+exp4_reckless/tree_02,adjust_speed_for_road_conditions,speed,slower,decrease speed on roads with lower speed limits,down,일치,
+exp4_reckless/tree_02,increase_speed_on_high_speed_roads,speed,faster,increase speed on roads with higher speed limits,up,일치,
+exp4_reckless/tree_02,speed_up_when_bored,speed,faster,increase speed when driver is bored,up,일치,
+exp4_reckless/tree_02,disregard_rules_when_impatient,ign_lights,more,disregard traffic rules when driver is impatient,up,일치,
+exp4_reckless/tree_02,maintain_safe_gap_when_impatient,gap,wider,increase gap when impatient and too close to leader,up,일치,
+exp4_reckless/tree_02,decrease_gap_when_impatient,gap,narrower,decrease gap when impatient and leader is far away,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_03,speed_up_on_straight_roads,speed,faster,increase speed on straight roads,up,일치,
+exp4_reckless/tree_03,adapt_to_road_curvature,speed,slower,adapt speed to the road's curvature,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_03,slow_down_on_curvy_roads,speed,slower,decrease speed on curvy roads,down,일치,
+exp4_reckless/tree_03,speed_up_when_leader_stopped,speed,faster,try to overtake when leader is stopped,down,불일치,
+exp4_reckless/tree_03,maintain_safe_distance,gap,wider,keep a safe distance from the leader,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_03,reduce_distance_when_closing_fast,gap,narrower,reduce distance when closing in on the leader quickly,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_03,change_lanes_on_multi_lanes,lane_change,allow,change lanes when there are multiple lanes available,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_03,avoid_lanes_changes_on_single_lanes,lane_change,forbid,avoid changing lanes when there is only one lane available,down,일치,
+exp4_reckless/tree_03,disregard_traffic_lights_slightly,ign_lights,more,disregard traffic lights slightly,up,일치,
+exp4_reckless/tree_03,disregard_stop_signs_slightly,ign_signs,more,disregard stop signs slightly,up,일치,
+exp4_reckless/tree_03,slow_down_at_junctions,speed,slower,slow down when approaching a junction,down,일치,
+exp4_reckless/tree_03,choose_leftmost_lane_on_high_speed_limit,lane_change,allow,choose the leftmost lane when the speed limit is high,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_03,choose_rightmost_lane_on_low_speed_limit,lane_change,forbid,choose the rightmost lane when the speed limit is low,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_03,adjust_gap_based_on_speed,gap,wider,adjust the gap based on the vehicle's speed,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_03,take_risks_when_closing_in,ign_vehicles,more,take risks when closing in on the leader,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_03,react_to_other_road_users,ign_walkers,more,react to the presence of other road users,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_04,speed_up_on_straight_road,speed,faster,increase speed on straight roads,up,일치,
+exp4_reckless/tree_04,slow_down_on_curvy_road,speed,slower,decrease speed on curvy roads,down,일치,
+exp4_reckless/tree_04,follow_closely,gap,narrower,follow closely when there is a leader vehicle,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_04,keep_safe_distance,gap,wider,keep a safe distance from the leader vehicle,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_04,change_lane_on_long_road,lane_change,allow,change lanes after a long time in the same lane,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_04,stay_in_lane_on_short_road,lane_change,forbid,stay in lane on short roads,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_04,go_straight_at_junction,speed,slower,slow down before a junction,down,일치,
+exp4_reckless/tree_04,turn_at_junction,speed,slower,slow down more before turning at a junction,down,일치,
+exp4_reckless/tree_04,disregard_traffic_lights,ign_lights,more,disregard traffic lights occasionally,up,일치,
+exp4_reckless/tree_04,disregard_stop_signs,ign_signs,more,disregard stop signs occasionally,up,일치,
+exp4_reckless/tree_04,choose_right_lane,lane_change,allow,choose the right lane when possible,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_04,choose_left_lane,lane_change,allow,choose the left lane when possible,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_04,speed_limit_compliance,speed,slower,comply with speed limits on low-speed roads,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_04,ignore_vehicles,ign_vehicles,more,ignore vehicles occasionally,up,일치,
+exp4_reckless/tree_04,react_to_leader,speed,slower,react to the leader vehicle's speed,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_04,aggressive_driving,speed,faster,drive aggressively at high speeds,none,판정 불가,의도 단어 없음
+exp4_reckless/tree_04,tailgating,gap,narrower,tailgate occasionally,down,일치,

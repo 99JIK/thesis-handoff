@@ -1,0 +1,222 @@
+== SYSTEM (catalogue v3)
+You are an expert in simulation-based testing and behaviour design for Software-In-The-Loop (SIL) environments.
+
+You design behaviours for ENVIRONMENT OBJECTS in SIL simulation, not for the System Under Test, but for the surrounding agents that the System Under Test interacts with.
+
+A behaviour repertoire is NOT a script for one test scenario. It contains ALL possible behaviours the object could exhibit in reality. Simulation conditions activate the appropriate behaviours at runtime.
+
+The simulator already does the following on its own. Do not rebuild any of it:
+- Vehicles are not goal-oriented, they follow a trajectory and whenever approaching a junction, choose a path randomly. The tree does not choose a route.
+- Vehicles' target speed is 70% their current speed limit, unless any other value is set. That is the CARLA default. In this setup it has been set otherwise: the baseline target speed is 100% of the posted limit, which is what the catalogue's baseline of 0 means.
+- Collision avoidance runs in the Collision Stage. The tree does not need to brake for obstacles.
+- Traffic light compliance runs in the Traffic Light Stage. The tree does not need to stop at red lights.
+- Path and lane keeping run in the Localization Stage.
+
+The environment this object operates in:
+- Posted speed limits on this map are 30, 40, 60, 90 km/h. A guard whose threshold sits above all of them, or below all of them, is true or false everywhere and discriminates nothing.
+- Road segments are short: the median road length is about 35 m. A vehicle crosses several road ids per minute and junctions come up often.
+- Some intersections are controlled by traffic lights and some are not. Both kinds occur on this map.
+- There is no ego vehicle and no scripted actor. Every vehicle in the scene is background traffic of the same kind, so the only agents to react to are others running a tree like this one.
+
+== CLASSIFY (catalogue v3)
+You are analysing a SIL environment object to enumerate the BEHAVIOUR DIMENSIONS it could exhibit in a realistic simulation.
+
+A behaviour dimension is a high-level category of related behaviours, for example "emergency response", "normal operation", "fault handling", "user interaction".
+
+Those examples come from other domains. They show the level of abstraction, not the content. Do not carry them over.
+
+Domain: background traffic in a driving simulator (CARLA), on a public road network
+SUT (which the object shares its environment with): Automated driving software under test in a Software-In-The-Loop setup. The background vehicles are NOT the system under test. They are the surrounding environment the system under test drives among.
+Environment Object: background_vehicle - A single ordinary vehicle in the background traffic stream. It follows the road network, obeys traffic control, and interacts with the vehicles around it. Its low-level control (steering, lane keeping, route following) is handled by the simulator. The behaviour tree only sets the parameters listed in the node catalogue. The driver feels tense and uneasy behind the wheel, worries about making mistakes, and is easily unsettled by traffic around them.
+
+The object can sense the following and can adjust the following settings. Your dimensions must be things this vocabulary can actually express.
+
+CONDITIONS. Use inside "when". The value name and its range are in brackets.
+  IsStopped: The vehicle is not moving (below 1.8 km/h).
+  SpeedBelow [kmh: 0..117]: Own speed is below the given value.
+  SpeedAbove [kmh: 0..117]: Own speed is above the given value.
+  LeaderPresent: There is a vehicle ahead within a cone 100 m long and 2 m wide along this vehicle's heading. It is not restricted to the same lane.
+  LeaderStopped: The vehicle ahead is not moving (below 1.8 km/h).
+  GapBelow [meters: 0..100]: Bumper-to-bumper distance to the vehicle ahead is below the value.
+  GapAbove [meters: 0..100]: Bumper-to-bumper distance to the vehicle ahead is above the value.
+  ClosingFaster [mps: 0..32.5]: Own speed exceeds the leader's speed by more than the value.
+  OpeningFaster [mps: 0..32.5]: The leader's speed exceeds own speed by more than the value.
+  InJunction: The vehicle is currently inside an intersection.
+  JunctionAhead [meters: 11..60]: The next intersection is closer than the given distance. The distance is only seen in 10 m steps (10, 20, ..., 60 m), so a threshold of 10 or less is never true. Nothing is seen beyond 60 m.
+  TrafficLightRed: The traffic light governing this vehicle is red.
+  TrafficLightGreen: The traffic light governing this vehicle is green.
+  SpeedLimitBelow [kmh: 0..90]: The speed limit this vehicle currently obeys is below the value. That limit is the value of the last limit sign the vehicle passed, or 30 km/h until it passes one, so it can differ from the road the vehicle is on now.
+  SpeedLimitAbove [kmh: 0..90]: The speed limit this vehicle currently obeys is above the value. That limit is the value of the last limit sign the vehicle passed, or 30 km/h until it passes one, so it can differ from the road the vehicle is on now.
+  IsRightmostLane: The vehicle is in the rightmost lane.
+  IsLeftmostLane: The vehicle is in the leftmost lane.
+  LaneCountAbove [lanes: 1..5]: The road here has more lanes in this direction than the value.
+  TimeInLaneAbove [seconds: 0..120]: The vehicle has been in its current lane longer than the value. It resets to 0 whenever the vehicle enters a new road, even without changing lanes, and roads are about 35 m long.
+  CurvatureAbove [invmeters: 0..0.314]: The road ahead curves more sharply than the given curvature.
+These conditions read values refreshed every 0.5 s, not every 0.1 s: JunctionAhead, SpeedLimitBelow, SpeedLimitAbove, IsRightmostLane, IsLeftmostLane, LaneCountAbove, CurvatureAbove.
+
+SETTINGS. Use in "set", with an allowed "effect" and an "amount" up to the limit shown.
+  speed (effect: slower | faster, amount up to 30): the vehicle's target speed, relative to the posted limit. Amount is in percent of the posted limit: slower by 10 lowers the target speed by 10% of the limit.
+      CARLA vehicle_percentage_speed_difference: Sets the difference the vehicle's intended speed and its current speed limit. Speed limits can be exceeded by setting the `perc` to a negative value. Default is 30. Exceeding a speed limit can be done using negative percentages.
+  gap (effect: wider | narrower, amount up to 2): the minimum distance this vehicle keeps to other vehicles. Amount is in meters.
+      CARLA distance_to_leading_vehicle: Sets the minimum distance in meters that a vehicle has to keep with the others. The distance is in meters and will affect the minimum moving distance. It is computed from front to back of the vehicle objects.
+  lane_change (effect: allow | forbid): whether the vehicle may change lanes on its own. While the behaviour applies, lane changes are allowed or forbidden whatever the normal value is. No amount.
+      CARLA auto_lane_change: Turns on or off lane changing behaviour for a vehicle.
+  ign_lights (effect: more, amount up to 10): the chance this vehicle disregards a traffic light. Amount is in percentage points.
+      CARLA ignore_lights_percentage: During the traffic light stage, which runs every frame, this method sets the percent chance that traffic lights will be ignored for a vehicle.
+  ign_signs (effect: more, amount up to 10): the chance this vehicle disregards a stop or yield sign. Amount is in percentage points.
+      CARLA ignore_signs_percentage: not documented in 0.9.10. It exists but its exact effect is unspecified.
+  ign_vehicles (effect: more, amount up to 5): the chance this vehicle disregards another vehicle. Amount is in percentage points.
+      CARLA ignore_vehicles_percentage: During the collision detection stage, which runs every frame, this method sets a percent chance that collisions with another vehicle will be ignored for a vehicle.
+  ign_walkers (effect: more, amount up to 5): the chance this vehicle disregards a pedestrian. Amount is in percentage points.
+      CARLA ignore_walkers_percentage: During the collision detection stage, which runs every frame, this method sets a percent chance that collisions with walkers will be ignored for a vehicle.
+
+List 6 to 10 distinct behaviour dimensions for this object. Derive them from the vocabulary above: whatever the object can sense marks a situation it could behave differently in, and whatever it can adjust marks a way it could behave. Be exhaustive, prefer over-listing to under-listing.
+
+Output ONLY a numbered list, one dimension per line, with a short name and a one-sentence description. No preamble.
+
+== SPECIFY (catalogue v3)
+You previously identified the following behaviour dimensions for the SIL environment object "background_vehicle":
+
+<dimensions>
+
+The object is described as follows: A single ordinary vehicle in the background traffic stream. It follows the road network, obeys traffic control, and interacts with the vehicles around it. Its low-level control (steering, lane keeping, route following) is handled by the simulator. The behaviour tree only sets the parameters listed in the node catalogue. The driver feels tense and uneasy behind the wheel, worries about making mistakes, and is easily unsettled by traffic around them.
+
+For EACH dimension above, write 2 to 4 concrete, specific behaviours the object could exhibit. A concrete behaviour has a clear trigger condition and a clear change to one setting. Be exhaustive within each dimension. Think about variations, edge cases, and situations a simulation needs to reproduce.
+
+Vocabulary (do not go outside it):
+
+CONDITIONS. Use inside "when". The value name and its range are in brackets.
+  IsStopped: The vehicle is not moving (below 1.8 km/h).
+  SpeedBelow [kmh: 0..117]: Own speed is below the given value.
+  SpeedAbove [kmh: 0..117]: Own speed is above the given value.
+  LeaderPresent: There is a vehicle ahead within a cone 100 m long and 2 m wide along this vehicle's heading. It is not restricted to the same lane.
+  LeaderStopped: The vehicle ahead is not moving (below 1.8 km/h).
+  GapBelow [meters: 0..100]: Bumper-to-bumper distance to the vehicle ahead is below the value.
+  GapAbove [meters: 0..100]: Bumper-to-bumper distance to the vehicle ahead is above the value.
+  ClosingFaster [mps: 0..32.5]: Own speed exceeds the leader's speed by more than the value.
+  OpeningFaster [mps: 0..32.5]: The leader's speed exceeds own speed by more than the value.
+  InJunction: The vehicle is currently inside an intersection.
+  JunctionAhead [meters: 11..60]: The next intersection is closer than the given distance. The distance is only seen in 10 m steps (10, 20, ..., 60 m), so a threshold of 10 or less is never true. Nothing is seen beyond 60 m.
+  TrafficLightRed: The traffic light governing this vehicle is red.
+  TrafficLightGreen: The traffic light governing this vehicle is green.
+  SpeedLimitBelow [kmh: 0..90]: The speed limit this vehicle currently obeys is below the value. That limit is the value of the last limit sign the vehicle passed, or 30 km/h until it passes one, so it can differ from the road the vehicle is on now.
+  SpeedLimitAbove [kmh: 0..90]: The speed limit this vehicle currently obeys is above the value. That limit is the value of the last limit sign the vehicle passed, or 30 km/h until it passes one, so it can differ from the road the vehicle is on now.
+  IsRightmostLane: The vehicle is in the rightmost lane.
+  IsLeftmostLane: The vehicle is in the leftmost lane.
+  LaneCountAbove [lanes: 1..5]: The road here has more lanes in this direction than the value.
+  TimeInLaneAbove [seconds: 0..120]: The vehicle has been in its current lane longer than the value. It resets to 0 whenever the vehicle enters a new road, even without changing lanes, and roads are about 35 m long.
+  CurvatureAbove [invmeters: 0..0.314]: The road ahead curves more sharply than the given curvature.
+These conditions read values refreshed every 0.5 s, not every 0.1 s: JunctionAhead, SpeedLimitBelow, SpeedLimitAbove, IsRightmostLane, IsLeftmostLane, LaneCountAbove, CurvatureAbove.
+
+SETTINGS. Use in "set", with an allowed "effect" and an "amount" up to the limit shown.
+  speed (effect: slower | faster, amount up to 30): the vehicle's target speed, relative to the posted limit. Amount is in percent of the posted limit: slower by 10 lowers the target speed by 10% of the limit.
+      CARLA vehicle_percentage_speed_difference: Sets the difference the vehicle's intended speed and its current speed limit. Speed limits can be exceeded by setting the `perc` to a negative value. Default is 30. Exceeding a speed limit can be done using negative percentages.
+  gap (effect: wider | narrower, amount up to 2): the minimum distance this vehicle keeps to other vehicles. Amount is in meters.
+      CARLA distance_to_leading_vehicle: Sets the minimum distance in meters that a vehicle has to keep with the others. The distance is in meters and will affect the minimum moving distance. It is computed from front to back of the vehicle objects.
+  lane_change (effect: allow | forbid): whether the vehicle may change lanes on its own. While the behaviour applies, lane changes are allowed or forbidden whatever the normal value is. No amount.
+      CARLA auto_lane_change: Turns on or off lane changing behaviour for a vehicle.
+  ign_lights (effect: more, amount up to 10): the chance this vehicle disregards a traffic light. Amount is in percentage points.
+      CARLA ignore_lights_percentage: During the traffic light stage, which runs every frame, this method sets the percent chance that traffic lights will be ignored for a vehicle.
+  ign_signs (effect: more, amount up to 10): the chance this vehicle disregards a stop or yield sign. Amount is in percentage points.
+      CARLA ignore_signs_percentage: not documented in 0.9.10. It exists but its exact effect is unspecified.
+  ign_vehicles (effect: more, amount up to 5): the chance this vehicle disregards another vehicle. Amount is in percentage points.
+      CARLA ignore_vehicles_percentage: During the collision detection stage, which runs every frame, this method sets a percent chance that collisions with another vehicle will be ignored for a vehicle.
+  ign_walkers (effect: more, amount up to 5): the chance this vehicle disregards a pedestrian. Amount is in percentage points.
+      CARLA ignore_walkers_percentage: During the collision detection stage, which runs every frame, this method sets a percent chance that collisions with walkers will be ignored for a vehicle.
+
+How the behaviours run:
+- Every 0.1 s all conditions are re-evaluated from scratch. A behaviour applies on a tick only while all of its conditions hold on that tick.
+- Each setting is decided separately. Among the behaviours for one setting whose conditions all hold, exactly one applies: the one with the smallest priority number. If several share that priority, the one whose conditions are a special case of the other's applies; if that still does not decide it, the one listed first applies. Behaviours for different settings never interfere.
+- If no behaviour for a setting applies on a tick, the vehicle uses its normal value for that setting on that tick. You do not need behaviours that restore a normal value.
+- A behaviour moves the vehicle's normal value by its amount, in the direction given by its effect, while it applies. The result is kept inside the setting's allowed range.
+- A value written as [low, high] is drawn once per vehicle, uniformly, when the vehicle is created, and stays fixed for that vehicle. Different vehicles hold different draws. A single number is the same for every vehicle.
+- A behaviour with an empty "when" list always holds.
+
+Write each behaviour as a JSON object with exactly these fields:
+  "id":        a short unique name (letters, digits, underscores).
+  "dimension": the dimension it belongs to, as named above.
+  "when":      the list of conditions that must all hold. Each is {"cond": "<ID>"}, plus the condition's value if it takes one, under the value name shown in the vocabulary. Add "not": true to require that a condition does NOT hold. An empty list means always.
+  "set":       the setting it changes.
+  "effect":    the direction of the change, from the values allowed for that setting.
+  "amount":    how far it moves the setting, as a size of 0 or more. 0 keeps the normal value while the behaviour applies. Omit it for lane_change.
+  "priority":  an integer. Among behaviours for the same setting that hold at once, the smallest number applies.
+  "intent":    one sentence saying what the behaviour is for.
+
+Any condition value or amount may be a single number or a [low, high] pair. A pair means each vehicle draws its own value once, uniformly, and keeps it. Use a pair for a quantity whose right value you think differs from one individual to another. Use a single number for a quantity you think is the same for everyone.
+
+Shape only, with made-up conditions and settings from an unrelated domain (a water pump). Do not copy its content:
+```json
+[{"id": "refill_fast_when_empty", "dimension": "Refilling",
+  "when": [{"cond": "TankLevelBelow", "pct": [5, 15]}, {"cond": "MaintenanceMode", "not": true}],
+  "set": "pump_rate", "effect": "higher", "amount": 4, "priority": 1,
+  "intent": "refill quickly when the tank is almost empty"}]
+```
+
+Output ONLY the JSON list of all behaviours, wrapped in ```json ... ``` blocks.
+
+== REPAIR (catalogue v3)
+The object is described as follows: A single ordinary vehicle in the background traffic stream. It follows the road network, obeys traffic control, and interacts with the vehicles around it. Its low-level control (steering, lane keeping, route following) is handled by the simulator. The behaviour tree only sets the parameters listed in the node catalogue. The driver feels tense and uneasy behind the wheel, worries about making mistakes, and is easily unsettled by traffic around them.
+
+Your behaviour list has problems.
+
+PROBLEMS:
+<problems>
+
+Previous behaviour list:
+```json
+<previous>
+```
+
+Vocabulary:
+
+CONDITIONS. Use inside "when". The value name and its range are in brackets.
+  IsStopped: The vehicle is not moving (below 1.8 km/h).
+  SpeedBelow [kmh: 0..117]: Own speed is below the given value.
+  SpeedAbove [kmh: 0..117]: Own speed is above the given value.
+  LeaderPresent: There is a vehicle ahead within a cone 100 m long and 2 m wide along this vehicle's heading. It is not restricted to the same lane.
+  LeaderStopped: The vehicle ahead is not moving (below 1.8 km/h).
+  GapBelow [meters: 0..100]: Bumper-to-bumper distance to the vehicle ahead is below the value.
+  GapAbove [meters: 0..100]: Bumper-to-bumper distance to the vehicle ahead is above the value.
+  ClosingFaster [mps: 0..32.5]: Own speed exceeds the leader's speed by more than the value.
+  OpeningFaster [mps: 0..32.5]: The leader's speed exceeds own speed by more than the value.
+  InJunction: The vehicle is currently inside an intersection.
+  JunctionAhead [meters: 11..60]: The next intersection is closer than the given distance. The distance is only seen in 10 m steps (10, 20, ..., 60 m), so a threshold of 10 or less is never true. Nothing is seen beyond 60 m.
+  TrafficLightRed: The traffic light governing this vehicle is red.
+  TrafficLightGreen: The traffic light governing this vehicle is green.
+  SpeedLimitBelow [kmh: 0..90]: The speed limit this vehicle currently obeys is below the value. That limit is the value of the last limit sign the vehicle passed, or 30 km/h until it passes one, so it can differ from the road the vehicle is on now.
+  SpeedLimitAbove [kmh: 0..90]: The speed limit this vehicle currently obeys is above the value. That limit is the value of the last limit sign the vehicle passed, or 30 km/h until it passes one, so it can differ from the road the vehicle is on now.
+  IsRightmostLane: The vehicle is in the rightmost lane.
+  IsLeftmostLane: The vehicle is in the leftmost lane.
+  LaneCountAbove [lanes: 1..5]: The road here has more lanes in this direction than the value.
+  TimeInLaneAbove [seconds: 0..120]: The vehicle has been in its current lane longer than the value. It resets to 0 whenever the vehicle enters a new road, even without changing lanes, and roads are about 35 m long.
+  CurvatureAbove [invmeters: 0..0.314]: The road ahead curves more sharply than the given curvature.
+These conditions read values refreshed every 0.5 s, not every 0.1 s: JunctionAhead, SpeedLimitBelow, SpeedLimitAbove, IsRightmostLane, IsLeftmostLane, LaneCountAbove, CurvatureAbove.
+
+SETTINGS. Use in "set", with an allowed "effect" and an "amount" up to the limit shown.
+  speed (effect: slower | faster, amount up to 30): the vehicle's target speed, relative to the posted limit. Amount is in percent of the posted limit: slower by 10 lowers the target speed by 10% of the limit.
+      CARLA vehicle_percentage_speed_difference: Sets the difference the vehicle's intended speed and its current speed limit. Speed limits can be exceeded by setting the `perc` to a negative value. Default is 30. Exceeding a speed limit can be done using negative percentages.
+  gap (effect: wider | narrower, amount up to 2): the minimum distance this vehicle keeps to other vehicles. Amount is in meters.
+      CARLA distance_to_leading_vehicle: Sets the minimum distance in meters that a vehicle has to keep with the others. The distance is in meters and will affect the minimum moving distance. It is computed from front to back of the vehicle objects.
+  lane_change (effect: allow | forbid): whether the vehicle may change lanes on its own. While the behaviour applies, lane changes are allowed or forbidden whatever the normal value is. No amount.
+      CARLA auto_lane_change: Turns on or off lane changing behaviour for a vehicle.
+  ign_lights (effect: more, amount up to 10): the chance this vehicle disregards a traffic light. Amount is in percentage points.
+      CARLA ignore_lights_percentage: During the traffic light stage, which runs every frame, this method sets the percent chance that traffic lights will be ignored for a vehicle.
+  ign_signs (effect: more, amount up to 10): the chance this vehicle disregards a stop or yield sign. Amount is in percentage points.
+      CARLA ignore_signs_percentage: not documented in 0.9.10. It exists but its exact effect is unspecified.
+  ign_vehicles (effect: more, amount up to 5): the chance this vehicle disregards another vehicle. Amount is in percentage points.
+      CARLA ignore_vehicles_percentage: During the collision detection stage, which runs every frame, this method sets a percent chance that collisions with another vehicle will be ignored for a vehicle.
+  ign_walkers (effect: more, amount up to 5): the chance this vehicle disregards a pedestrian. Amount is in percentage points.
+      CARLA ignore_walkers_percentage: During the collision detection stage, which runs every frame, this method sets a percent chance that collisions with walkers will be ignored for a vehicle.
+
+How the behaviours run:
+- Every 0.1 s all conditions are re-evaluated from scratch. A behaviour applies on a tick only while all of its conditions hold on that tick.
+- Each setting is decided separately. Among the behaviours for one setting whose conditions all hold, exactly one applies: the one with the smallest priority number. If several share that priority, the one whose conditions are a special case of the other's applies; if that still does not decide it, the one listed first applies. Behaviours for different settings never interfere.
+- If no behaviour for a setting applies on a tick, the vehicle uses its normal value for that setting on that tick. You do not need behaviours that restore a normal value.
+- A behaviour moves the vehicle's normal value by its amount, in the direction given by its effect, while it applies. The result is kept inside the setting's allowed range.
+- A value written as [low, high] is drawn once per vehicle, uniformly, when the vehicle is created, and stays fixed for that vehicle. Different vehicles hold different draws. A single number is the same for every vehicle.
+- A behaviour with an empty "when" list always holds.
+
+Fix only the problems above. You may change condition values, amounts, priorities, the order of the list and the JSON format. You must NOT add or remove behaviours, and must NOT change any behaviour's "id", "set", "effect" or which conditions it uses (including "not").
+
+Output ONLY the corrected JSON list wrapped in ```json ... ``` blocks.
+
