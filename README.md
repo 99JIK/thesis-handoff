@@ -127,6 +127,7 @@
 
 ### 비교 조건
 
+- **plain은 CARLA TM 기본값이 아니라 카탈로그 기준값을 쓴 조건.** 차마다 [`baseline_want`](ch3_method/scripts/bt_runtime.py)(57~61행)로 `KNOBS` 기준값(speed_diff 0, gap 2.5 m, keep_right 50%, 무시 네 종 0%, 차선 변경 허용)을 명시해 넣음([`collect.py`](ch4_design/scripts/collect.py) 226~228행, `apply_knobs` 116행~). 전역 속도차도 0으로 둠(196행). CARLA 기본은 제한속도의 70%(speed_diff 30)라 목표 속도가 다름([`tm_api.py`](ch3_method/spec/tm_api.py) 64~70행 주석). gap, keep_right가 TM 기본과 같은지는 확인 안 함
 - plain: 기준값. knob: 차량별 추첨. ptree: 같은 추첨 위에 트리(offset). pknob: 같은 시드, 같은 스폰 자리 ptree 차가 실제로 받은 값의 시간 평균을 상수로 줌
 - pknob 평균 계산([코드] `collect.py` 285~315, 361~368행): ptree 판에서 매 틱 적용값을 차량별로 누적. 워밍업 뒤 초기화해 측정 구간만 평균. lane_change는 허용 틱 비율이 0.5 이상이면 허용([설계] 판단값, 143행). 같은 자리 ptree 값이 없으면 추첨값을 쓰도록 했으나 64판 모두 해당 0건
 - **sd 17.29**: [`mech.md`](ch5_results/results/exp4/mech.md) 적용값 퍼짐 표의 speed_diff 차량 간 표준편차. **단위는 % (제한속도 대비 속도차)**. 판마다 차량 간 sd를 내고 판 평균. knob 17.74, ptree와 pknob 17.29(같은 값이 맞음. pknob은 ptree 평균을 그대로 받음)
@@ -145,6 +146,17 @@
 - 교차로 판정: CARLA `is_junction` 플래그가 아니라 OpenDRIVE 연결로 분류(87~161행). 무신호 직진이나 두 갈래 교차로는 일반 도로로 봄
 - 확인 필요: 관측 시작과 끝에 걸린 첫 run과 끝 run은 run이 3개 이상인 차에서만 뺌(265~268, 279행). run이 1~2개인 차의 잘린 교차로 run은 남음
 - 다섯 특징(`sig_of` 234~249행): 위치를 sEMA($\Delta$ = 0.5 s, 창 $\pm 3\Delta$)로 평활한 뒤 미분. 단위마다 $v$ 평균, $v$ 표준편차, $a$ 평균, $a$ 표준편차, 가속 부호 변화 수 / 이동거리 x 100. $|a| > 8$인 프레임과 15프레임 미만 단위는 버림
+- 칸 크기는 **층마다 다름**([`scale.yaml`](ch4_design/config/scale.yaml), 실측 다섯 종에서 층별 단위가 200개 넘을 때 낸 특징별 sd). 발표 18쪽 값은 교차로 것만 반올림한 것
+
+  | 특징 | 교차로 | 도심 블록 | 고속(기술만) |
+  |---|---|---|---|
+  | $v$ 평균 (m/s) | 4.221 | 3.970 | 10.698 |
+  | $v$ 표준편차 (m/s) | 0.991 | 0.807 | 0.485 |
+  | $a$ 평균 (m/s²) | 0.798 | 0.721 | 0.432 |
+  | $a$ 표준편차 (m/s²) | 0.514 | 0.537 | 0.597 |
+  | 가속 부호 변화 (100 m당) | 7.625 | 18.202 | 3.678 |
+
+  yaml 키 이름(`v_mean` 등)은 특징 이름이고 값은 그 특징의 실측 sd. 출처는 앞 레포 `sil-agent-repertoire` 커밋 a604b91 `results/ladder/repertoire.txt` 3~5행
 - 격자와 Hill 수(377~404행): 특징을 실측 층별 sd([`scale.yaml`](ch4_design/config/scale.yaml))로 나눠 폭 1 격자. 원점 20개를 균등하게 옮겨 평균. 판마다 단위 수를 최소값에 맞춰 희박화. $q=1$ Hill 수 $\exp(H)$. 배수는 맵마다 (조건 시드 평균 / plain 시드 평균), 대비는 맵 8개 차이의 t 구간
 - 실측 전처리: [`realism.py`](ch4_design/diag/realism.py) 160~195행이 앞 레포 코드([`sil-agent-repertoire_measure.py`](ch4_design/real_preprocess/sil-agent-repertoire_measure.py))의 `real_frames`(2434~2448행)를 출처별로 부름. NGSIM 1736행~, TGSIM 1678행~, inD 2074행~, SinD 2326행~, highD 2382행~. 각 함수 docstring에 단위 환산, 솎음, 교차로 판정 방식이 있음(세부는 확인 안 함)
 - recall(`realism.py` 283~309행): 층, 맵마다. 실측 단위 가운데 그 조건의 시뮬 단위가 밟은 칸에 떨어지는 비율. 조건 사이 단위 수를 맞추고 원점 10개 평균. 실측과 시뮬 모두 500단위 이상일 때만 계산
